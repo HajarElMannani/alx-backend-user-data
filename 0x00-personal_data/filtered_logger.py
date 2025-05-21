@@ -18,7 +18,7 @@ def filter_datum(fields: List[str],
     return final
 
 
-def get_logger(self) -> logging.Logger:
+def get_logger() -> logging.Logger:
     '''Function that returns a logging.Logger object.'''
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)

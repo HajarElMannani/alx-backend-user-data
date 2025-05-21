@@ -10,7 +10,7 @@ def filter_datum(fields: List[str],
                  message: str,
                  separator: str) -> str:
     '''Function that returns the log message obfuscated'''
-    reg = rf'({"|".join(map(re.escape, fields))})=([^{separator}]+)'
+    reg = rf'({"|".join(map(re.escape, fields))})=([^{re.escape(separator)}]+)'
     final = re.sub(reg, lambda x: f'{x.group(1)}={redaction}', message)
     return final
 
@@ -23,7 +23,7 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
-    def __init__(self, fields) -> None:
+    def __init__(self, fields: List[str]):
         '''instantiation'''
         self.fields = fields
         super(RedactingFormatter, self).__init__(self.FORMAT)

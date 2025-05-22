@@ -72,8 +72,8 @@ def main() -> None:
     '''main Function'''
     db = get_db()
     cursor = db.cursor()
-    fields = "name;email;phone;ssn;password;ip;last_login;user_agent"
-    columns = fields.split(';')
+    fields = "name,email,phone,ssn,password,ip,last_login,user_agent"
+    columns = fields.split(',')
     cursor.execute("SELECT {} from users;".format(fields))
     logger = get_logger()
     rows = cursor.fetchall()
@@ -84,6 +84,6 @@ def main() -> None:
     cursor.close()
     db.close()
 
-    
+
 if __name__ == '__main__':
     main()

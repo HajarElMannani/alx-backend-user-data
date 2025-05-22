@@ -66,3 +66,24 @@ class RedactingFormatter(logging.Formatter):
                                    formatted,
                                    self.SEPARATOR)
         return new_message
+
+
+def main() -> None:
+    '''main Function'''
+    db = get_db()
+    cursor = db.cursor()
+    fields = "name;email;phone;ssn;password;ip;last_login;user_agent"
+    columns = fields.split(';')
+    cursor.execute("SELECT {} from users;".format(fields))
+    logger = get_logger()
+    rows = cursor.fetchall()
+    for row in rows:
+        record = [f'{field}={value}' for field, value in zip(columns, row)]
+        message = ';'.join(record) + ';'
+        logger.info(message)
+    cursor.close()
+    db.close()
+
+    
+if __name__ == '__main__':
+    main()

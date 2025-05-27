@@ -66,7 +66,7 @@ class BasicAuth(Auth):
         if user_inst[0].is_valid_password(user_pwd) is False:
             return None
         return user_inst[0]
-    
+
     def current_user(self, request=None) -> TypeVar('User'):
         '''that overloads Auth and retrieves the User instance for a request'''
         auth_header = self.authorization_header(request)

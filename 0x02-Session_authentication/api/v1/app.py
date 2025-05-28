@@ -39,6 +39,7 @@ def before_request():
     if auth_header is None:
         abort(401)
     curr_user = auth.current_user(request)
+    request.current_user = curr_user
     if curr_user is None:
         abort(403)
 

@@ -30,11 +30,14 @@ def login_session():
     resp.set_cookie(getenv('SESSION_NAME'), session_id)
     return resp
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+
+@app_views.route('/auth_session/logout',
+                 methods=['DELETE'],
+                 strict_slashes=False)
 def logout():
     '''session logout'''
     from api.v1.app import auth
     destroyed = auth.destroy_session(request)
-    if destroyed == False:
+    if destroyed is False:
         abort(404)
-    return jsonify({}), 200    
+    return jsonify({}), 200

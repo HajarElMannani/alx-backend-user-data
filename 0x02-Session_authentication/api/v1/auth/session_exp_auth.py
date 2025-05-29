@@ -13,10 +13,11 @@ class SessionExpAuth(SessionAuth):
     '''class to  add an expiration date to a Session ID'''
     def __init__(self):
         '''instantiation'''
-        duration = int(getenv('SESSION_DURATION'))
-        if duration is None or not isinstance(duration, int):
-            duration = 0
-        self.session_duration = duration
+        duration = getenv('SESSION_DURATION')
+        try:
+            self.session_duration = int(duration)
+        except (ValueError, TypeError):
+            self.session_duration = 0
 
     def create_session(self, user_id=None):
         '''Ceate a session'''

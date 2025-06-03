@@ -52,7 +52,7 @@ class DB:
     def update_user(self, user_id: int, **kwarg) -> None:
         """Update the user"""
         if not kwarg:
-            raise ValueError
+            raise ValueError()
         user = self.find_user_by(id=user_id)
         if user is None:
             return

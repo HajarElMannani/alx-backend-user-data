@@ -54,5 +54,8 @@ class DB:
         if not kwarg:
             raise ValueError
         user = self.find_user_by(id=user_id)
+        if user is None:
+            return
         for key, value in kwarg.items():
             setattr(user, key, value)
+        self._session.commit()

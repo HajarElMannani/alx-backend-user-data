@@ -7,8 +7,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
-from typing import Any
-
 from user import Base, User
 
 
@@ -40,7 +38,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwarg: Any) -> User:
+    def find_user_by(self, **kwarg) -> User:
         """Method returns the first row found in
         the users table as filtered by the method’s input arguments"""
         try:
@@ -51,7 +49,7 @@ class DB:
         except InvalidRequestError:
             raise
 
-    def update_user(self, user_id: int, **kwarg: Any) -> None:
+    def update_user(self, user_id: int, **kwarg) -> None:
         """Update the user"""
         if kwarg is None:
             raise ValueError

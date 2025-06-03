@@ -35,10 +35,10 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """save the user to the database"""
-        user = User(email=email, hashed_password=hashed_password)
-        self.__session.add(user)
-        self.__session.commit()
-        return user
+        new_user = User(email=email, hashed_password=hashed_password)
+        self._session.add(new_user)
+        self._session.commit()
+        return new_user
 
     def find_user_by(self, **kwarg: Any) -> User:
         """Method returns the first row found in

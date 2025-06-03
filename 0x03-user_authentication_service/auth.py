@@ -6,7 +6,7 @@ from user import User
 
 
 def _hash_password(password: str) -> bytes:
-    '''returns salted hash of the input 
+    '''returns salted hash of the input
     password, hashed with bcrypt.hashpw.'''
     hashed = bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())
     return hashed
@@ -28,5 +28,3 @@ class Auth:
             hashed = _hash_password(password)
             user = self._db.add_user(email, hashed)
             return user
-                             
-        

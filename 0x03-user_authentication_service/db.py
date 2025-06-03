@@ -41,8 +41,8 @@ class DB:
         return user
 
     def find_user_by(self, **kwarg: Any) -> User:
-        '''Method returns the first row found in
-        the users table as filtered by the method’s input arguments'''
+        """Method returns the first row found in
+        the users table as filtered by the method’s input arguments"""
         try:
             first_row = self._session.query(User).filter_by(**kwarg).one()
             return first_row
@@ -52,7 +52,7 @@ class DB:
             raise
 
     def update_user(self, user_id: int, **kwarg: Any) -> None:
-        '''Update the user'''
+        """Update the user"""
         if kwarg is None:
             raise ValueError
         user = self.find_user_by(id=user_id)

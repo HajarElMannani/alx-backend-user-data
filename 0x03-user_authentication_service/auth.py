@@ -46,3 +46,12 @@ class Auth:
         if pswd:
             return True
         return False
+
+    def create_session(self, email: str) -> str:
+        """"Create a new user seesion"""
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return None
+        session_id = _generate_uuid()
+        return session_id

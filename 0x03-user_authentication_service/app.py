@@ -34,9 +34,9 @@ def login():
     if AUTH.valid_login(email, password) is False:
         abort(401)
     session_id = AUTH.create_session(email)
-    res = make_response()
+    res = make_response(jsonify({"email": email, "message": "logged in"}))
     res.set_cookie("session_id", session_id)
-    return jsonify({"email": email, "message": "logged in"})
+    return res
 
 
 if __name__ == "__main__":
